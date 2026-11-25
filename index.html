@@ -295,16 +295,6 @@
                 </button>
               </span>
             </summary>
-            <fieldset class="tipo-discapacidad-campo" id="tipo-discapacidad-baj">
-              <legend>Tipo de discapacidad en la que ayuda:<span class="marca-obligatorio" aria-hidden="true">*</span></legend>
-              <div class="tipo-discapacidad-opciones">
-                <label><input type="checkbox" name="tipo-discapacidad-baj" value="Auditiva"><span>Auditiva</span><img src="../atlas_apoyo_compartido/svg/discapacidad/auditiva.svg" alt="" aria-hidden="true"></label>
-                <label><input type="checkbox" name="tipo-discapacidad-baj" value="Motriz"><span>Motriz</span><img src="../atlas_apoyo_compartido/svg/discapacidad/motriz.svg" alt="" aria-hidden="true"></label>
-                <label><input type="checkbox" name="tipo-discapacidad-baj" value="Cognitiva"><span>Cognitiva</span><img src="../atlas_apoyo_compartido/svg/discapacidad/cognitiva.svg" alt="" aria-hidden="true"></label>
-                <label><input type="checkbox" name="tipo-discapacidad-baj" value="Visual"><span>Visual</span><img src="../atlas_apoyo_compartido/svg/discapacidad/visual.svg" alt="" aria-hidden="true"></label>
-                <label><input type="checkbox" name="tipo-discapacidad-baj" value="Parkinson"><span>Parkinson</span><img src="../atlas_apoyo_compartido/svg/discapacidad/parkinson.svg" alt="" aria-hidden="true"></label>
-              </div>
-            </fieldset>
             <div class="contenedor-categoria">
               <button type="button" class="btn-cate" onclick="abrirModalCate1()">
                 <span class="btn-cate-txt">Categoría<span class="marca-obligatorio" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></span>
@@ -319,6 +309,16 @@
               </button>
             </div>
             <p id="aviso-categoria" class="mensaje-error-campo" role="alert" hidden></p>
+            <fieldset class="tipo-discapacidad-campo" id="tipo-discapacidad-baj">
+              <legend>Tipo de discapacidad en la que ayuda:<span class="marca-obligatorio" aria-hidden="true">*</span></legend>
+              <div class="tipo-discapacidad-opciones">
+                <label><input type="checkbox" name="tipo-discapacidad-baj" value="Auditiva"><span>Auditiva</span><img src="../atlas_apoyo_compartido/svg/discapacidad/auditiva.svg" alt="" aria-hidden="true"></label>
+                <label><input type="checkbox" name="tipo-discapacidad-baj" value="Motriz"><span>Motriz</span><img src="../atlas_apoyo_compartido/svg/discapacidad/motriz.svg" alt="" aria-hidden="true"></label>
+                <label><input type="checkbox" name="tipo-discapacidad-baj" value="Cognitiva"><span>Cognitiva</span><img src="../atlas_apoyo_compartido/svg/discapacidad/cognitiva.svg" alt="" aria-hidden="true"></label>
+                <label><input type="checkbox" name="tipo-discapacidad-baj" value="Visual"><span>Visual</span><img src="../atlas_apoyo_compartido/svg/discapacidad/visual.svg" alt="" aria-hidden="true"></label>
+                <label><input type="checkbox" name="tipo-discapacidad-baj" value="Parkinson"><span>Parkinson</span><img src="../atlas_apoyo_compartido/svg/discapacidad/parkinson.svg" alt="" aria-hidden="true"></label>
+              </div>
+            </fieldset>
           </details>
           <!--MATERIALES-->
           <details id="seccion-materiales">
@@ -451,24 +451,16 @@
           </div>
         </div>
         <div class="acordeon-form">
-          <!--TITULO,IMAGEN, FILTRO-->
+          <!--NOMBRE, DESCRIPCIÓN E IMAGEN-->
           <div class="guia-card">
             <div class="paso-item">
               <div class="paso-columna-texto">
                 <label>Nombre:<span class="marca-obligatorio" aria-hidden="true">*</span>
                   <input type="text" class="input-moderno" placeholder="Nombre del producto" maxlength="30" aria-required="true">
                 </label>
-                <label id="titulo-precio-com">Precio:<span class="marca-obligatorio" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
-                <div class="contenedor-slider-filtros" style="display: flex; gap: 10px;" id="precio-com" role="group" aria-labelledby="titulo-precio-com">
-                  <button type="button" class="btn-filtro"
-                    onclick="cambiarOpcionPrecioComercializado(this, 'Bajo')">Bajo (hasta 20 €)</button>
-                  <button type="button" class="btn-filtro"
-                    onclick="cambiarOpcionPrecioComercializado(this, 'Medio')">Medio (20-50 €)</button>
-                  <button type="button" class="btn-filtro"
-                    onclick="cambiarOpcionPrecioComercializado(this, 'Alto')">Alto (más de 50 €)</button>
-                </div>
-                <!-- Elemento oculto o span para guardar el valor seleccionado para la validación -->
-                <span id="valor-precio-comercializado" style="display: none;">No seleccionada</span>
+                <label>Descripción:<span class="marca-obligatorio" aria-hidden="true">*</span>
+                  <textarea id="descripcion-com" class="input-moderno" placeholder="Breve descripción..." maxlength="300" aria-required="true"></textarea>
+                </label>
               </div>
 
               <div class="paso-columna-imagen">
@@ -484,6 +476,34 @@
                 </div>
               </div>
             </div>
+
+            <!--PRECIO (en euros)-->
+            <div class="form-row">
+              <label for="precio-com-euros">Precio en euros:<span class="marca-obligatorio" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
+              <div class="campo-precio-euros">
+                <input type="number" id="precio-com-euros" class="input-moderno" min="0" max="100000" step="0.01"
+                  inputmode="decimal" placeholder="Por ejemplo: 25" aria-required="true" aria-describedby="ayuda-precio-com">
+                <span aria-hidden="true">€</span>
+              </div>
+              <p id="ayuda-precio-com" class="ayuda-precio">Escribe lo que te costó, aunque sea aproximado.</p>
+            </div>
+
+            <!--CATEGORÍAS-->
+            <div class="contenedor-categoria" id="categoria-sele" role="group" aria-label="Categoría">
+              <button type="button" class="btn-cate" onclick="abrirModalCate1('-com')">
+                <span class="btn-cate-txt">Categoría<span class="marca-obligatorio" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></span>
+                <span id="valor-n1-com" class="btn-sele-filt">No seleccionada</span>
+                <img loading="lazy" decoding="async" id="icono-elegido-n1-com" class="cap-icon-cate" src="" alt=""
+                  style="display: none;">
+              </button>
+              <button type="button" class="btn-cate" onclick="abrirModalNivel2('-com')">
+                <span class="btn-cate-txt">Subcategoría<span class="marca-obligatorio" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></span>
+                <span id="valor-n2-com" class="btn-sele-filt">No seleccionada</span>
+                <img loading="lazy" decoding="async" id="icono-elegido-n2-com" class="cap-icon-cate" src="" alt=""
+                  style="display: none;">
+              </button>
+            </div>
+            <p id="aviso-categoria-com" class="mensaje-error-campo" role="alert" hidden></p>
             <fieldset class="tipo-discapacidad-campo" id="tipo-discapacidad-com">
               <legend>Tipo de discapacidad en la que ayuda:<span class="marca-obligatorio" aria-hidden="true">*</span></legend>
               <div class="tipo-discapacidad-opciones">
@@ -494,32 +514,10 @@
                 <label><input type="checkbox" name="tipo-discapacidad-com" value="Parkinson"><span>Parkinson</span><img src="../atlas_apoyo_compartido/svg/discapacidad/parkinson.svg" alt="" aria-hidden="true"></label>
               </div>
             </fieldset>
-            <div class="form-row">
-              <label id="titulo-categoria-sele">Categoría:<span class="marca-obligatorio" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></label>
-              <div class="contenedor-categoria" id="categoria-sele" role="group" aria-labelledby="titulo-categoria-sele">
-                <button type="button" class="btn-cate" onclick="abrirModalCate1('-com')">
-                  <span class="btn-cate-txt">Categoría<span class="marca-obligatorio" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></span>
-                  <span id="valor-n1-com" class="btn-sele-filt">No seleccionada</span>
-                  <img loading="lazy" decoding="async" id="icono-elegido-n1-com" class="cap-icon-cate" src="" alt=""
-                    style="display: none;">
-                </button>
-                <button type="button" class="btn-cate" onclick="abrirModalNivel2('-com')">
-                  <span class="btn-cate-txt">Subcategoría<span class="marca-obligatorio" aria-hidden="true">*</span><span class="sr-only"> (obligatorio)</span></span>
-                  <span id="valor-n2-com" class="btn-sele-filt">No seleccionada</span>
-                  <img loading="lazy" decoding="async" id="icono-elegido-n2-com" class="cap-icon-cate" src="" alt=""
-                    style="display: none;">
-                </button>
-              </div>
-            </div>
-            <p id="aviso-categoria-com" class="mensaje-error-campo" role="alert" hidden></p>
-            <div class="form-row">
-              <label>Descripción:<span class="marca-obligatorio" aria-hidden="true">*</span>
-                <textarea class="input-moderno" placeholder="Breve descripción..." maxlength="300" aria-required="true"></textarea>
-              </label>
-            </div>
+            <!--FORMA DE COMPRA-->
             <div class="form-row">
               <label>Forma de compra:<span class="marca-obligatorio" aria-hidden="true">*</span>
-                <textarea class="input-moderno" placeholder="¿Cómo lo has comprado?" maxlength="400" aria-required="true"></textarea>
+                <textarea id="compra-com" class="input-moderno" placeholder="¿Cómo lo has comprado?" maxlength="400" aria-required="true"></textarea>
               </label>
             </div>
           </div>
